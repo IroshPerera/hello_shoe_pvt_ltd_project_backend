@@ -1,7 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Gender;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Role;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Gender;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

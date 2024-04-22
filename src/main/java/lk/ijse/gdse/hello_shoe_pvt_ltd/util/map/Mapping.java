@@ -1,4 +1,4 @@
-package lk.ijse.gdse.hello_shoe_pvt_ltd.util;
+package lk.ijse.gdse.hello_shoe_pvt_ltd.util.map;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;

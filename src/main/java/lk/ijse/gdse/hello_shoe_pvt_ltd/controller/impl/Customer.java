@@ -1,5 +1,6 @@
-package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
+package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 
+import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.CustomerController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
-public class Customer {
+public class Customer implements CustomerController<String, CustomerDTO>{
 
     private final CustomerService customerService;
 

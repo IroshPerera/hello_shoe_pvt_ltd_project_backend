@@ -1,12 +1,12 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dao.CustomerRepo;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.CustomerRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.CustomerService;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Converter;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Mapping;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.convert.Converter;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.map.Mapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

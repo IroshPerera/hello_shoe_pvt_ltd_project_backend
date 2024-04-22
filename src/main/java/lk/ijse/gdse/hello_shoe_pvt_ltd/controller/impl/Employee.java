@@ -1,6 +1,6 @@
-package lk.ijse.gdse.hello_shoe_pvt_ltd.controller;
+package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.EmployeeController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/employees")
+@RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
-public class Employee {
+public class Employee implements EmployeeController<String, EmployeeDTO>{
 
     private final EmployeeService employeeService;
 

@@ -1,6 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.dto;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.util.Category;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
