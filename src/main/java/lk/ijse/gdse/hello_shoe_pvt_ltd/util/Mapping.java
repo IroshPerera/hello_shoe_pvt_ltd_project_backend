@@ -1,8 +1,10 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.util;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -42,6 +44,20 @@ public class Mapping {
 
     public List<SupplierDTO> mapToSupplierDTOList(List<SupplierEntity> supplierEntities){
         return modelMapper.map(supplierEntities, List.class);
+    }
+
+    //employee mappings
+
+    public EmployeeDTO mapToEmployeeDTO(EmployeeEntity employeeEntity){
+        return modelMapper.map(employeeEntity, EmployeeDTO.class);
+    }
+
+    public EmployeeEntity mapToEmployeeEntity(EmployeeDTO employeeDTO){
+        return modelMapper.map(employeeDTO, EmployeeEntity.class);
+    }
+
+    public List<EmployeeDTO> mapToEmployeeDTOList(List<EmployeeEntity> employeeEntities){
+        return modelMapper.map(employeeEntities, List.class);
     }
 
 }
