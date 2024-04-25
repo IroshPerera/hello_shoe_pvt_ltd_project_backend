@@ -2,9 +2,11 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.util.map;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -58,6 +60,19 @@ public class Mapping {
 
     public List<EmployeeDTO> mapToEmployeeDTOList(List<EmployeeEntity> employeeEntities){
         return modelMapper.map(employeeEntities, List.class);
+    }
+
+    //inventory mappings
+    public InventoryDTO mapToInventoryDTO(InventoryEntity inventoryEntity){
+        return modelMapper.map(inventoryEntity, InventoryDTO.class);
+    }
+
+    public InventoryEntity mapToInventoryEntity(InventoryDTO inventoryDTO){
+        return modelMapper.map(inventoryDTO, InventoryEntity.class);
+    }
+
+    public List<InventoryDTO> mapToInventoryDTOList(List<InventoryEntity> inventoryEntities){
+        return modelMapper.map(inventoryEntities, List.class);
     }
 
 }
