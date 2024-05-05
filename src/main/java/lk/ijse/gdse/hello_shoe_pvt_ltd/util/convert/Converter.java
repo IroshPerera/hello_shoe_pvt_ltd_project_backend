@@ -1,17 +1,16 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.util.convert;
 
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.CustomerDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
-import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.map.Mapping;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class Converter {
+
+    private Mapping mapping;
 
     //set customer dtos values to temCustomer entity
     public void convertCustomerEntity(CustomerDTO customerDTO, CustomerEntity tmpCustomerEntity) {
@@ -61,7 +60,6 @@ public class Converter {
         tmpEmployeeEntity.setRole(employeeDTO.getRole());
         tmpEmployeeEntity.setDob(employeeDTO.getDob());
         tmpEmployeeEntity.setJoined_date(employeeDTO.getJoined_date());
-        tmpEmployeeEntity.setBranch(employeeDTO.getBranch());
         tmpEmployeeEntity.setBuilding_number(employeeDTO.getBuilding_number());
         tmpEmployeeEntity.setLane(employeeDTO.getLane());
         tmpEmployeeEntity.setCity(employeeDTO.getCity());
@@ -79,7 +77,11 @@ public class Converter {
         tmpInventoryEntity.setItem_code(inventoryDTO.getItem_code());
         tmpInventoryEntity.setItem_desc(inventoryDTO.getItem_desc());
         tmpInventoryEntity.setItem_pic(inventoryDTO.getItem_pic());
-        tmpInventoryEntity.setCategory(inventoryDTO.getCategory());
+        tmpInventoryEntity.setOccasion(inventoryDTO.getOccasion());
+        tmpInventoryEntity.setGender(inventoryDTO.getGender());
+        tmpInventoryEntity.setVerities(inventoryDTO.getVerities());
+        tmpInventoryEntity.setSupplier(mapping.mapToSupplierEntity(inventoryDTO.getSupplier()));
+       /* tmpInventoryEntity.setCategory(inventoryDTO.getCategory());
         tmpInventoryEntity.setSize(inventoryDTO.getSize());
         tmpInventoryEntity.setSupplier_code(inventoryDTO.getSupplier_code());
         tmpInventoryEntity.setSupplier_name(inventoryDTO.getSupplier_name());
@@ -88,6 +90,47 @@ public class Converter {
         tmpInventoryEntity.setExpected_profit(inventoryDTO.getExpected_profit());
         tmpInventoryEntity.setProfit_margin(inventoryDTO.getProfit_margin());
         tmpInventoryEntity.setStatus(inventoryDTO.getStatus());
-        tmpInventoryEntity.setQty_on_hand(inventoryDTO.getQty_on_hand());
+        tmpInventoryEntity.setQty_on_hand(inventoryDTO.getQty_on_hand());*/
+    }
+
+    //set return entity values to temReturn dto
+    public void convertReturnEntity(ReturnDTO returnDTO, ReturnEntity tmpReturnEntity) {
+        tmpReturnEntity.setReturn_id(returnDTO.getReturn_id());
+        tmpReturnEntity.setReturn_date(returnDTO.getReturn_date());
+        tmpReturnEntity.setReason(returnDTO.getReason());
+
+    }
+
+    //set sale entity values to temSale dto
+    public void convertSaleEntity(SaleDTO saleDTO, SaleEntity tmpSaleEntity) {
+        tmpSaleEntity.setOrder_id(saleDTO.getOrder_id());
+        // tmpSaleEntity.setItem_code(saleDTO.getItem_code());
+        tmpSaleEntity.setCustomer(mapping.mapToCustomerEntity(saleDTO.getCustomer()));
+        // tmpSaleEntity.setItem_desc(saleDTO.getItem_desc());
+        // tmpSaleEntity.setSize(saleDTO.getSize());
+        // tmpSaleEntity.setUnit_price(saleDTO.getUnit_price());
+        // tmpSaleEntity.setItem_qty(saleDTO.getItem_qty());
+        tmpSaleEntity.setTotal_price(saleDTO.getTotal_price());
+        tmpSaleEntity.setPurchase_date(saleDTO.getPurchase_date());
+        tmpSaleEntity.setPayment_method(saleDTO.getPayment_method());
+        tmpSaleEntity.setAdded_points(saleDTO.getAdded_points());
+        tmpSaleEntity.setCashier_name(saleDTO.getCashier_name());
+    }
+
+    //set size entity values to temSize dto
+    public void convertSizeEntity(SizeDTO sizeDTO, SizeEntity tmpSizeEntity) {
+        tmpSizeEntity.setSize_code(sizeDTO.getSize_code());
+        tmpSizeEntity.setSize(sizeDTO.getSize());
+    }
+
+    //set size inventory details entity values to temSizeInventoryDetails dto
+    public void convertBranchEntity(BranchDTO branchDTO, BranchEntity branchEntity) {
+        branchEntity.setBranch_code(branchDTO.getBranch_code());
+        branchEntity.setBranch_name(branchDTO.getBranch_name());
+        branchEntity.setAddress(branchDTO.getAddress());
+        branchEntity.setContact(branchDTO.getContact());
+        branchEntity.setNo_of_employee(branchDTO.getNo_of_employee());
+        branchEntity.setBranch_manager(branchDTO.getBranch_manager());
+        branchEntity.setEmployees(mapping.mapToEmployeeEntities(branchDTO.getEmployees()));
     }
 }
