@@ -69,6 +69,7 @@ public class Converter {
         tmpEmployeeEntity.setEmail(employeeDTO.getEmail());
         tmpEmployeeEntity.setGuardian_name(employeeDTO.getGuardian_name());
         tmpEmployeeEntity.setGuardian_contact(employeeDTO.getGuardian_contact());
+        tmpEmployeeEntity.setBranch(mapping.mapToBranchEntity(employeeDTO.getBranch()));
 
     }
 
