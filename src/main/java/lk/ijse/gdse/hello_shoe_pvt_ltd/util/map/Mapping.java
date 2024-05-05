@@ -190,4 +190,12 @@ List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>(
     public List<EmployeeEntity> mapToEmployeeEntities(List<EmployeeDTO> employees) {
         return employees.stream().map(hotel -> modelMapper.map(hotel, EmployeeEntity.class)).collect(Collectors.toList());
     }
+
+    public UserEntity toUserEntity(UserDTO userDTO) {
+        return modelMapper.map(userDTO, UserEntity.class);
+    }
+
+    public void toUserDTO(UserEntity save) {
+
+    }
 }
