@@ -2,11 +2,14 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "supplier")
@@ -27,4 +30,7 @@ public class SupplierEntity {
     private String mobile_contact;
     private String landline_contact;
     private String email;
+
+    @OneToMany(mappedBy = "supplier")
+    private List<InventoryEntity> inventories;
 }
