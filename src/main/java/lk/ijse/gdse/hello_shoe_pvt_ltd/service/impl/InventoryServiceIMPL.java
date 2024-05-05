@@ -2,8 +2,11 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SizeInventoryDetailsEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.InventoryRepo;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.SizeInventoryDetailsRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.convert.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.map.Mapping;
@@ -20,17 +23,35 @@ public class InventoryServiceIMPL implements InventoryService {
 
 
     private final InventoryRepo inventoryRepo;
+    private final SizeInventoryDetailsRepo sizeInventoryDetailsRepo;
     private final Mapping mapping;
     private final Converter converter;
 
     @Override
-    public boolean add(InventoryDTO inventoryDTO) {
+    public boolean add(InventoryDetailsDTO inventoryDetailsDTO) {
 
-        InventoryEntity inventoryEntity = mapping.mapToInventoryEntity(inventoryDTO);
+        if (inventoryRepo.existsById(inventoryDetailsDTO.getInventoryDTO().getItem_code())) {
+            return false;
+        }
+
+        InventoryEntity inventoryEntity = mapping.mapToInventoryEntity(inventoryDetailsDTO.getInventoryDTO());
+        List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = mapping.mapToSizeInventoryDetailsEntity(inventoryDetailsDTO.getSizeInventoryDetailsDTO());
+
         inventoryRepo.save(inventoryEntity);
-        return inventoryRepo.existsById(inventoryEntity.getItem_code());
+        sizeInventoryDetailsRepo.saveAll(sizeInventoryDetailsEntities);
+
+        if (inventoryRepo.existsById(inventoryEntity.getItem_code())) {
+            return true;
+        } else {
+            return false;
+        }
 
 
+    }
+
+    @Override
+    public boolean add(InventoryDTO inventoryDTO) {
+        return false;
     }
 
     @Override
