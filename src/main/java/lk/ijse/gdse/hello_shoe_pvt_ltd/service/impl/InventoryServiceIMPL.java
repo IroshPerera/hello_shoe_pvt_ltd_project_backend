@@ -30,12 +30,12 @@ public class InventoryServiceIMPL implements InventoryService {
     @Override
     public boolean add(InventoryDetailsDTO inventoryDetailsDTO) {
 
-        if (inventoryRepo.existsById(inventoryDetailsDTO.getInventoryDTO().getItem_code())) {
-            return false;
-        }
 
         InventoryEntity inventoryEntity = mapping.mapToInventoryEntity(inventoryDetailsDTO.getInventoryDTO());
         List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = mapping.mapToSizeInventoryDetailsEntity(inventoryDetailsDTO.getSizeInventoryDetailsDTO());
+
+        System.out.println("inventoryEntity = " + inventoryEntity);
+        System.out.println("sizeInventoryDetailsEntities = " + sizeInventoryDetailsEntities);
 
         inventoryRepo.save(inventoryEntity);
         sizeInventoryDetailsRepo.saveAll(sizeInventoryDetailsEntities);
