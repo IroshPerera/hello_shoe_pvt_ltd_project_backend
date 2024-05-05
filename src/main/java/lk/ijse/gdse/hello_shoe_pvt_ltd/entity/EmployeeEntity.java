@@ -1,8 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Gender;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Role;
 import lombok.AllArgsConstructor;
@@ -27,7 +25,6 @@ public class EmployeeEntity {
     private Role role;
     private Date dob;
     private Date joined_date;
-    private String branch;
     private String building_number;
     private String lane;
     private String city;
@@ -37,4 +34,8 @@ public class EmployeeEntity {
     private String email;
     private String guardian_name;
     private String guardian_contact;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_code",referencedColumnName = "branch_code")
+    private BranchEntity branch;
 }
