@@ -2,6 +2,7 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.InventoryController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class Inventory implements InventoryController<String, InventoryDTO> {
 
     @Override
     @PostMapping
-    public boolean saveInventory(@RequestBody InventoryDTO inventoryDTO) {
-        return inventoryService.add(inventoryDTO);
+    public boolean saveInventory(@RequestBody InventoryDetailsDTO inventoryDetailsDTO) {
+        return inventoryService.add(inventoryDetailsDTO);
     }
 
     @Override
