@@ -1,8 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Gender;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Level;
 import lombok.AllArgsConstructor;
@@ -11,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -35,5 +35,7 @@ public class CustomerEntity {
     private String contact;
     private String email;
     private Timestamp recent_purchase;
+    @OneToMany(mappedBy = "customer")
+    private List<SaleEntity> sales = new ArrayList<>();
 
 }
