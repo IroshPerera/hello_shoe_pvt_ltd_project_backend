@@ -22,7 +22,6 @@ public class EmployeeDTO implements SuperDTO{
     private Role role;
     private Date dob;
     private Date joined_date;
-    private String branch;
     private String building_number;
     private String lane;
     private String city;
@@ -32,4 +31,6 @@ public class EmployeeDTO implements SuperDTO{
     private String email;
     private String guardian_name;
     private String guardian_contact;
+
+    private BranchDTO branch;
 }
