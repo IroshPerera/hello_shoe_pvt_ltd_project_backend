@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +30,5 @@ public class CustomerDTO implements SuperDTO{
     private String contact;
     private String email;
     private Timestamp recent_purchase;
+    private List<SaleDTO> sale = new ArrayList<>();
 }
