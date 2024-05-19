@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/branch")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Branch implements BranchController<String, BranchDTO> {
 
     private final BranchService branchService;
