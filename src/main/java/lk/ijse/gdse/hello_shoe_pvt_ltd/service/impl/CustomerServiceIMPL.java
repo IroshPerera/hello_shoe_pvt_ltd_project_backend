@@ -27,6 +27,7 @@ public class CustomerServiceIMPL implements CustomerService {
     @Override
     public boolean add(CustomerDTO customerDTO) {
         CustomerEntity customerEntity = mapping.mapToCustomerEntity(customerDTO);
+        customerEntity.setActive_state("ACTIVE");
         customerRepo.save(customerEntity);
         return customerRepo.existsById(customerEntity.getCustomer_code());
     }
@@ -34,7 +35,9 @@ public class CustomerServiceIMPL implements CustomerService {
     @Override
     public boolean delete(String customer_code) {
         if (customerRepo.existsById(customer_code)) {
-            customerRepo.deleteById(customer_code);
+
+            customerRepo.changeActiveState("DEACTIVATE", customer_code);
+
             return true;
         } else {
             return false;
@@ -45,12 +48,14 @@ public class CustomerServiceIMPL implements CustomerService {
 
     @Override
     public boolean update(CustomerDTO customerDTO) {
-        Optional<CustomerEntity> tmpCustomer = customerRepo.findById(customerDTO.getCustomer_code());
+       /* Optional<CustomerEntity> tmpCustomer = customerRepo.findById(customerDTO.getCustomer_code());
         if (tmpCustomer.isPresent()) {
             converter.convertCustomerEntity(customerDTO, tmpCustomer.get());
             return true;
         }
-        return false;
+        return false;*/
+        customerDTO.setActive_state("ACTIVE");
+        return add(customerDTO);
     }
 
     @Override
@@ -62,5 +67,23 @@ public class CustomerServiceIMPL implements CustomerService {
     @Override
     public List<CustomerDTO> getAll() {
         return mapping.mapToCustomerDTOList(customerRepo.findAll());
+    }
+
+    @Override
+    public String generateCustomerID() {
+        String customer_code = customerRepo.generateCustomerID();
+        if (customer_code == null) {
+            return "C001";
+        } else {
+            int customerID = Integer.parseInt(customer_code.replace("C", ""));
+            customerID++;
+            if (customerID < 10) {
+                return "C00" + customerID;
+            } else if (customerID < 100) {
+                return "C0" + customerID;
+            } else {
+                return "C" + customerID;
+            }
+        }
     }
 }
