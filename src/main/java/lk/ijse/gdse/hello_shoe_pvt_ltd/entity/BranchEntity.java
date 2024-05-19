@@ -1,9 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +23,6 @@ public class BranchEntity {
     private Integer no_of_employee;
 
     @OneToMany(mappedBy = "branch")
+    @JsonManagedReference
     private List<EmployeeEntity> employees;
 }
