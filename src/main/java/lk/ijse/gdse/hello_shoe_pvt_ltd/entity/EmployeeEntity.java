@@ -1,6 +1,8 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Designation;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Gender;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Role;
 import lombok.AllArgsConstructor;
@@ -21,7 +23,7 @@ public class EmployeeEntity {
     private String profile_pic;
     private Gender gender;
     private String status;
-    private String designation;
+    private Designation designation;
     private Role role;
     private Date dob;
     private Date joined_date;
@@ -34,8 +36,11 @@ public class EmployeeEntity {
     private String email;
     private String guardian_name;
     private String guardian_contact;
+    @Column(name = "active_state",columnDefinition = "varchar(10) default 'ACTIVE'")
+    private String active_state;
 
     @ManyToOne
     @JoinColumn(name = "branch_code",referencedColumnName = "branch_code")
+    @JsonBackReference
     private BranchEntity branch;
 }
