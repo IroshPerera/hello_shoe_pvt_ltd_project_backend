@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/size")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Size implements SizeController<String, SizeDTO> {
 
     private final SizeService sizeService;
@@ -28,14 +29,14 @@ public class Size implements SizeController<String, SizeDTO> {
 
     @Override
     @DeleteMapping
-    public boolean deleteSize(@RequestParam String size_id) {
-        return sizeService.delete(size_id);
+    public boolean deleteSize(@RequestParam String size_code) {
+        return sizeService.delete(size_code);
     }
 
     @Override
     @GetMapping
-    public SizeDTO searchSize(@RequestParam String size_id) {
-        return sizeService.search(size_id);
+    public SizeDTO searchSize(@RequestParam String size_code) {
+        return sizeService.search(size_code);
     }
 
     @Override
