@@ -35,6 +35,7 @@ public class CustomerEntity {
     private String contact;
     private String email;
     private Timestamp recent_purchase;
+    private String active_state;
     @OneToMany(mappedBy = "customer")
     private List<SaleEntity> sales = new ArrayList<>();
 
