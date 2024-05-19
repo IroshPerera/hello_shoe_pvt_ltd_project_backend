@@ -47,8 +47,8 @@ public class JWTServiceIMPL implements JWTService {
 
         extractClaim.put("role",userDetails.getAuthorities());
         Date now = new Date();
-        //expire time 2 minutes and set refresh token
-        Date expire = new Date(now.getTime() + 1000 * 60 * 2);
+        //expire time 10 hours and set refresh token
+        Date expire = new Date(now.getTime() + 1000 * 60 * 60 * 10);
         String accessToken = Jwts.builder().setClaims(extractClaim)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
