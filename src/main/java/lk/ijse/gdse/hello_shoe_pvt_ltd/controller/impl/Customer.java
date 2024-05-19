@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Customer implements CustomerController<String, CustomerDTO>{
 
     private final CustomerService customerService;
@@ -39,6 +40,11 @@ public class Customer implements CustomerController<String, CustomerDTO>{
     @GetMapping
     public CustomerDTO searchCustomer(@RequestParam String customer_code) {
         return customerService.search(customer_code);
+    }
+
+    @GetMapping("/id")
+    public String generateCustomerID() {
+        return customerService.generateCustomerID();
     }
 
     @GetMapping("/all")
