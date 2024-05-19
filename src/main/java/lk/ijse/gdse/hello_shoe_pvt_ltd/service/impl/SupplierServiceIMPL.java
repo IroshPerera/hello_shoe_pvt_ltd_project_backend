@@ -26,6 +26,7 @@ public class SupplierServiceIMPL implements SupplierService {
     public boolean add(SupplierDTO supplierDTO) {
 
         SupplierEntity supplierEntity = mapping.mapToSupplierEntity(supplierDTO);
+        supplierEntity.setActive_state("ACTIVE");
         supplierRepo.save(supplierEntity);
         return supplierRepo.existsById(supplierEntity.getSupplier_code());
 
@@ -34,7 +35,7 @@ public class SupplierServiceIMPL implements SupplierService {
     @Override
     public boolean delete(String supplier_code) {
         if (supplierRepo.existsById(supplier_code)) {
-            supplierRepo.deleteById(supplier_code);
+            supplierRepo.changeActiveState("DEACTIVATE", supplier_code);
             return true;
         } else {
             return false;
@@ -43,12 +44,15 @@ public class SupplierServiceIMPL implements SupplierService {
 
     @Override
     public boolean update(SupplierDTO supplierDTO) {
-        Optional<SupplierEntity> tmpSupplier = supplierRepo.findById(supplierDTO.getSupplier_code());
+       /* Optional<SupplierEntity> tmpSupplier = supplierRepo.findById(supplierDTO.getSupplier_code());
         if (tmpSupplier.isPresent()) {
             converter.convertSupplierEntity(supplierDTO, tmpSupplier.get());
             return true;
         }
-        return false;
+        return false;*/
+
+        supplierDTO.setActive_state("ACTIVE");
+        return add(supplierDTO);
     }
 
     @Override
@@ -60,5 +64,23 @@ public class SupplierServiceIMPL implements SupplierService {
     @Override
     public List<SupplierDTO> getAll() {
         return mapping.mapToSupplierDTOList(supplierRepo.findAll());
+    }
+
+    @Override
+    public String generateSupplierID() {
+       String supplierCode =  supplierRepo.generateSupplierID();
+         if (supplierCode == null){
+              return "S001";
+            }else{
+                int num = Integer.parseInt(supplierCode.replace("S", ""));
+                num++;
+                if (num < 10) {
+                    return "S00" + num;
+                } else if (num < 100) {
+                    return "S0" + num;
+                } else {
+                    return "S" + num;
+                }
+         }
     }
 }
