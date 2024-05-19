@@ -28,9 +28,9 @@ public class SizeServiceIMPL implements SizeService {
     }
 
     @Override
-    public boolean delete(String size_id) {
-        if (sizeRepo.existsById(size_id)) {
-            sizeRepo.deleteById(size_id);
+    public boolean delete(String size_code) {
+        if (sizeRepo.existsById(size_code)) {
+            sizeRepo.deleteById(size_code);
             return true;
         } else {
             return false;
@@ -39,13 +39,14 @@ public class SizeServiceIMPL implements SizeService {
 
     @Override
     public boolean update(SizeDTO sizeDTO) {
-        if (sizeRepo.existsById(sizeDTO.getSize_code())) {
+       /* if (sizeRepo.existsById(sizeDTO.getSize_code())) {
             SizeEntity sizeEntity = sizeRepo.getReferenceById(sizeDTO.getSize_code());
             converter.convertSizeEntity(sizeDTO, sizeEntity);
             return true;
         } else {
             return false;
-        }
+        }*/
+        return add(sizeDTO);
 
     }
 
