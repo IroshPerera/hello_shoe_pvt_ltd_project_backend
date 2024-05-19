@@ -21,5 +21,6 @@ public class SupplierDTO implements SuperDTO{
     private String mobile_contact;
     private String landline_contact;
     private String email;
+    private String active_state;
 
 }
