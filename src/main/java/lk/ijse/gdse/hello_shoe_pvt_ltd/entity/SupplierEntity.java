@@ -30,6 +30,7 @@ public class SupplierEntity {
     private String mobile_contact;
     private String landline_contact;
     private String email;
+    private String active_state;
 
     @OneToMany(mappedBy = "supplier")
     private List<InventoryEntity> inventories;
