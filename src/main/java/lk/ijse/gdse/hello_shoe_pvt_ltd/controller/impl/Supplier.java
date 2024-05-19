@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/supplier")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Supplier implements SupplierController<String,SupplierDTO> {
 
     private final SupplierService supplierService;
@@ -44,6 +45,11 @@ public class Supplier implements SupplierController<String,SupplierDTO> {
     @GetMapping("/all")
     public List<SupplierDTO> getAllSuppliers() {
         return supplierService.getAll();
+    }
+
+    @GetMapping("/id")
+    public String generateSupplierID() {
+        return supplierService.generateSupplierID();
     }
 
 }
