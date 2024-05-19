@@ -47,8 +47,45 @@ public class Mapping {
 
     //employee mappings
 
-    public EmployeeDTO mapToEmployeeDTO(EmployeeEntity employeeEntity){
-        return modelMapper.map(employeeEntity, EmployeeDTO.class);
+    public EmployeeDTO mapToEmployeeDTO(EmployeeEntity employeeEntity) {
+        if (employeeEntity == null) {
+            return null;
+        }
+
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setEmployee_code(employeeEntity.getEmployee_code());
+        employeeDTO.setName(employeeEntity.getName());
+        employeeDTO.setProfile_pic(employeeEntity.getProfile_pic());
+        employeeDTO.setGender(employeeEntity.getGender());
+        employeeDTO.setStatus(employeeEntity.getStatus());
+        employeeDTO.setDesignation(employeeEntity.getDesignation());
+        employeeDTO.setRole(employeeEntity.getRole());
+        employeeDTO.setDob(employeeEntity.getDob());
+        employeeDTO.setJoined_date(employeeEntity.getJoined_date());
+        employeeDTO.setBuilding_number(employeeEntity.getBuilding_number());
+        employeeDTO.setLane(employeeEntity.getLane());
+        employeeDTO.setCity(employeeEntity.getCity());
+        employeeDTO.setState(employeeEntity.getState());
+        employeeDTO.setPostal_code(employeeEntity.getPostal_code());
+        employeeDTO.setContact(employeeEntity.getContact());
+        employeeDTO.setEmail(employeeEntity.getEmail());
+        employeeDTO.setGuardian_name(employeeEntity.getGuardian_name());
+        employeeDTO.setGuardian_contact(employeeEntity.getGuardian_contact());
+
+        BranchEntity branchEntity = employeeEntity.getBranch();
+        if (branchEntity != null) {
+            BranchDTO branchDTO = new BranchDTO();
+            branchDTO.setBranch_code(branchEntity.getBranch_code());
+            branchDTO.setBranch_name(branchEntity.getBranch_name());
+            branchDTO.setBranch_manager(branchEntity.getBranch_manager());
+            branchDTO.setAddress(branchEntity.getAddress());
+            branchDTO.setContact(branchEntity.getContact());
+            branchDTO.setNo_of_employee(branchEntity.getNo_of_employee());
+            // Add employees if needed
+            employeeDTO.setBranch(branchDTO);
+        }
+
+        return employeeDTO;
     }
 
     public EmployeeEntity mapToEmployeeEntity(EmployeeDTO employeeDTO){
