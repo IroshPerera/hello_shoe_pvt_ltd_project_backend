@@ -30,5 +30,6 @@ public class CustomerDTO implements SuperDTO{
     private String contact;
     private String email;
     private Timestamp recent_purchase;
+    private String active_state;
     private List<SaleDTO> sale = new ArrayList<>();
 }
