@@ -37,6 +37,8 @@ public class JWTServiceIMPL implements JWTService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
+
+
     //actual process
     private <T> T extractClaim(String token, Function<Claims,T> claimsResolver) {
        final Claims claims = getAllClaims(token);
@@ -47,8 +49,8 @@ public class JWTServiceIMPL implements JWTService {
 
         extractClaim.put("role",userDetails.getAuthorities());
         Date now = new Date();
-        //expire time 10 hours and set refresh token
-        Date expire = new Date(now.getTime() + 1000 * 60 * 60 * 10);
+        //expire time 24 hours and set refresh token
+        Date expire = new Date(now.getTime() + 1000 * 60 * 60 * 24);
         String accessToken = Jwts.builder().setClaims(extractClaim)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
@@ -59,8 +61,6 @@ public class JWTServiceIMPL implements JWTService {
                         .setIssuedAt(now)
                         .setExpiration(new Date(now.getTime() + 1000 * 60 * 60))
                         .signWith(getSignKey(),SignatureAlgorithm.HS256).compact();
-
-
 
         return accessToken;
     }

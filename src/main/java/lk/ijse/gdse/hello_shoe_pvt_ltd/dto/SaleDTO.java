@@ -23,4 +23,5 @@ public class SaleDTO implements SuperDTO{
     private double added_points;
     private String cashier_name;
     private CustomerDTO customer;
+    private String customer_name;
 }

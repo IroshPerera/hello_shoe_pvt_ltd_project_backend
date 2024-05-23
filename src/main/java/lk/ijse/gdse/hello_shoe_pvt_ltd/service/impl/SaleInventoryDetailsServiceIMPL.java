@@ -47,4 +47,9 @@ public class SaleInventoryDetailsServiceIMPL implements SaleInventoryDetailsServ
     public List<SaleInventoryDetailsDTO> getAll() {
         return List.of();
     }
+
+    @Override
+    public void updateStatus(String orderId, String itemCode, String sizeCode, String returned) {
+        saleInventoryDetailsRepo.updateStatus(orderId,itemCode, Integer.valueOf(sizeCode),returned);
+    }
 }

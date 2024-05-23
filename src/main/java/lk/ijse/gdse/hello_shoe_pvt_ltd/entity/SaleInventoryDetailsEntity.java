@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,5 +29,6 @@ public class SaleInventoryDetailsEntity {
     private int item_qty;
     private Double selling_price;
     private String status;
-
+    private String branch_code;
+    private Date date;
 }

@@ -41,11 +41,21 @@ public class Customer implements CustomerController<String, CustomerDTO>{
     public CustomerDTO searchCustomer(@RequestParam String customer_code) {
         return customerService.search(customer_code);
     }
+  @GetMapping("/contact")
+    public CustomerDTO searchCustomerContact(@RequestParam String customer_contact) {
+        return customerService.searchContact(customer_contact);
+    }
 
     @GetMapping("/id")
     public String generateCustomerID() {
         return customerService.generateCustomerID();
     }
+
+    @GetMapping("/count")
+    public String getCustomerCount() {
+        return customerService.getCustomerCount();
+    }
+
 
     @GetMapping("/all")
     public List<CustomerDTO> getAllCustomers() {

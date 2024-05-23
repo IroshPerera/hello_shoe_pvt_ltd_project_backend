@@ -20,6 +20,8 @@ public class EmployeeEntity {
     @Id
     private String employee_code;
     private String name;
+    @Lob
+    @Column(name = "profile_pic", columnDefinition = "LONGTEXT")
     private String profile_pic;
     private Gender gender;
     private String status;

@@ -22,4 +22,11 @@ public interface SupplierRepo extends JpaRepository<SupplierEntity,String> {
     @Modifying
     @Query(value = "UPDATE supplier SET active_state = ?1 WHERE supplier_code = ?2", nativeQuery = true)
     void changeActiveState(String deactivate, String supplierCode);
+
+    @Query(value = "SELECT supplier_code FROM supplier WHERE name = ?1", nativeQuery = true)
+    String getSupplierNameAndCode(String supplier_name);
+
+    @Query(value = "SELECT * FROM supplier WHERE active_state = 'ACTIVE'", nativeQuery = true)
+    List<SupplierEntity> getSupplier();
+
 }

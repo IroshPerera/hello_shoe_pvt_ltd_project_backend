@@ -16,7 +16,7 @@ import java.util.List;
 public class SaleEntity {
     @Id
     private String order_id;
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "customer_code",referencedColumnName = "customer_code")
     private CustomerEntity customer;
     private double total_price;
@@ -24,6 +24,7 @@ public class SaleEntity {
     private String payment_method;
     private double added_points;
     private String cashier_name;
+    private String customer_name;
 
 
 }

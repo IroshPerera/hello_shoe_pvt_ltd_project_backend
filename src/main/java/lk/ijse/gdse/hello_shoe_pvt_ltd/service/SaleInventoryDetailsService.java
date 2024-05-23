@@ -15,4 +15,6 @@ public interface SaleInventoryDetailsService{
     public SaleInventoryDetailsDTO search(String s) ;
 
     public List<SaleInventoryDetailsDTO> getAll() ;
+
+    void updateStatus(String orderId, String itemCode, String sizeCode, String returned);
 }

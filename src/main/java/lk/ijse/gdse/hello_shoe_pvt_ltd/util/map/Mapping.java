@@ -18,31 +18,31 @@ public class Mapping {
 
     //customer mappings
 
-    public CustomerDTO mapToCustomerDTO(CustomerEntity customerEntity){
+    public CustomerDTO mapToCustomerDTO(CustomerEntity customerEntity) {
         return modelMapper.map(customerEntity, CustomerDTO.class);
 
     }
 
-    public CustomerEntity mapToCustomerEntity(CustomerDTO customerDTO){
+    public CustomerEntity mapToCustomerEntity(CustomerDTO customerDTO) {
         return modelMapper.map(customerDTO, CustomerEntity.class);
     }
 
-    public List<CustomerDTO> mapToCustomerDTOList(List<CustomerEntity> customerEntities){
-       return customerEntities.stream().map(hotel -> modelMapper.map(hotel, CustomerDTO.class)).collect(Collectors.toList());
+    public List<CustomerDTO> mapToCustomerDTOList(List<CustomerEntity> customerEntities) {
+        return customerEntities.stream().map(hotel -> modelMapper.map(hotel, CustomerDTO.class)).collect(Collectors.toList());
     }
 
     //supplier mappings
 
-    public SupplierDTO mapToSupplierDTO(SupplierEntity supplierEntity){
+    public SupplierDTO mapToSupplierDTO(SupplierEntity supplierEntity) {
         return modelMapper.map(supplierEntity, SupplierDTO.class);
     }
 
-    public SupplierEntity mapToSupplierEntity(SupplierDTO supplierDTO){
+    public SupplierEntity mapToSupplierEntity(SupplierDTO supplierDTO) {
         return modelMapper.map(supplierDTO, SupplierEntity.class);
     }
 
-    public List<SupplierDTO> mapToSupplierDTOList(List<SupplierEntity> supplierEntities){
-        return modelMapper.map(supplierEntities, List.class);
+    public List<SupplierDTO> mapToSupplierDTOList(List<SupplierEntity> supplierEntities) {
+        return supplierEntities.stream().map(hotel -> modelMapper.map(hotel, SupplierDTO.class)).collect(Collectors.toList());
     }
 
     //employee mappings
@@ -88,110 +88,108 @@ public class Mapping {
         return employeeDTO;
     }
 
-    public EmployeeEntity mapToEmployeeEntity(EmployeeDTO employeeDTO){
+    public EmployeeEntity mapToEmployeeEntity(EmployeeDTO employeeDTO) {
         return modelMapper.map(employeeDTO, EmployeeEntity.class);
     }
 
-    public List<EmployeeDTO> mapToEmployeeDTOList(List<EmployeeEntity> employeeEntities){
+    public List<EmployeeDTO> mapToEmployeeDTOList(List<EmployeeEntity> employeeEntities) {
         return modelMapper.map(employeeEntities, List.class);
     }
 
     //inventory mappings
-    public InventoryDTO mapToInventoryDTO(InventoryEntity inventoryEntity){
+    public InventoryDTO mapToInventoryDTO(InventoryEntity inventoryEntity) {
         return modelMapper.map(inventoryEntity, InventoryDTO.class);
     }
 
-    public InventoryEntity mapToInventoryEntity(InventoryDTO inventoryDTO){
+    public InventoryEntity mapToInventoryEntity(InventoryDTO inventoryDTO) {
         return modelMapper.map(inventoryDTO, InventoryEntity.class);
     }
 
-    public List<InventoryDTO> mapToInventoryDTOList(List<InventoryEntity> inventoryEntities){
+    public List<InventoryDTO> mapToInventoryDTOList(List<InventoryEntity> inventoryEntities) {
         return inventoryEntities.stream().map(hotel -> modelMapper.map(hotel, InventoryDTO.class)).collect(Collectors.toList());
     }
 
 
-
     //return mapping
-    public ReturnDTO mapToReturnDTO(ReturnEntity returnEntity){
+    public ReturnDTO mapToReturnDTO(ReturnEntity returnEntity) {
         return modelMapper.map(returnEntity, ReturnDTO.class);
     }
 
-    public ReturnEntity mapToReturnEntity(ReturnDTO returnDTO){
-       return modelMapper.map(returnDTO, ReturnEntity.class);
+    public ReturnEntity mapToReturnEntity(ReturnDTO returnDTO) {
+        return modelMapper.map(returnDTO, ReturnEntity.class);
     }
 
-    public List<ReturnDTO> mapToReturnDTOList(List<ReturnEntity> returnEntities){
+    public List<ReturnDTO> mapToReturnDTOList(List<ReturnEntity> returnEntities) {
         return modelMapper.map(returnEntities, List.class);
     }
 
     //sale mapping
-    public SaleDTO mapToSaleDTO(SaleEntity saleEntity){
+    public SaleDTO mapToSaleDTO(SaleEntity saleEntity) {
         return modelMapper.map(saleEntity, SaleDTO.class);
     }
 
-    public SaleEntity mapToSaleEntity(SaleDTO saleDTO){
+    public SaleEntity mapToSaleEntity(SaleDTO saleDTO) {
         return modelMapper.map(saleDTO, SaleEntity.class);
     }
 
-    public List<SaleDTO> mapToSaleDTOList(List<SaleEntity> saleEntities){
+    public List<SaleDTO> mapToSaleDTOList(List<SaleEntity> saleEntities) {
         return saleEntities.stream().map(hotel -> modelMapper.map(hotel, SaleDTO.class)).collect(Collectors.toList());
     }
 
     //size mapping
 
-    public SizeDTO mapToSizeDTO(SizeEntity sizeEntity){
+    public SizeDTO mapToSizeDTO(SizeEntity sizeEntity) {
         return modelMapper.map(sizeEntity, SizeDTO.class);
     }
 
-    public SizeEntity mapToSizeEntity(SizeDTO sizeDTO){
+    public SizeEntity mapToSizeEntity(SizeDTO sizeDTO) {
         return modelMapper.map(sizeDTO, SizeEntity.class);
     }
 
-    public List<SizeDTO> mapToSizeDTOList(List<SizeEntity> sizeEntities){
+    public List<SizeDTO> mapToSizeDTOList(List<SizeEntity> sizeEntities) {
         return modelMapper.map(sizeEntities, List.class);
     }
 
     //sale inventory details mapping
 
-    public SaleInventoryDetailsDTO mapToSaleInventoryDetailsDTO(SaleInventoryDetailsEntity saleInventoryDetailsEntity){
+    public SaleInventoryDetailsDTO mapToSaleInventoryDetailsDTO(SaleInventoryDetailsEntity saleInventoryDetailsEntity) {
         return modelMapper.map(saleInventoryDetailsEntity, SaleInventoryDetailsDTO.class);
     }
 
-    public SaleInventoryDetailsEntity mapToSaleInventoryDetailsEntity(SaleInventoryDetailsDTO saleInventoryDetailsDTO){
+    public SaleInventoryDetailsEntity mapToSaleInventoryDetailsEntity(SaleInventoryDetailsDTO saleInventoryDetailsDTO) {
         return modelMapper.map(saleInventoryDetailsDTO, SaleInventoryDetailsEntity.class);
     }
 
-    public List<SaleInventoryDetailsDTO> mapToSaleInventoryDetailsDTOList(List<SaleInventoryDetailsEntity> saleInventoryDetailsEntities){
+    public List<SaleInventoryDetailsDTO> mapToSaleInventoryDetailsDTOList(List<SaleInventoryDetailsEntity> saleInventoryDetailsEntities) {
         return saleInventoryDetailsEntities.stream().map(hotel -> modelMapper.map(hotel, SaleInventoryDetailsDTO.class)).collect(Collectors.toList());
     }
 
     public List<SaleInventoryDetailsEntity> mapToSaleDetailsDTO(SaleDetailsDTO saleDTO) {
 
 
-      List<SaleInventoryDetailsEntity> saleInventoryDetailsEntities = new ArrayList<>();
+        List<SaleInventoryDetailsEntity> saleInventoryDetailsEntities = new ArrayList<>();
 
 
         for (SaleInventoryDetailsDTO saleInventoryDetailsDTO : saleDTO.getSaleInventoryDetailsDTO()) {
 
             SaleInventoryDetailsEntity saleInventoryDetailsEntity = new SaleInventoryDetailsEntity();
 
-               saleInventoryDetailsEntity.setId(saleInventoryDetailsDTO.getId());
-               saleInventoryDetailsEntity.setSale(mapToSaleEntity(saleInventoryDetailsDTO.getSale()));
-                saleInventoryDetailsEntity.setInventory(mapToInventoryEntity(saleInventoryDetailsDTO.getInventory()));
-                saleInventoryDetailsEntity.setSize(saleInventoryDetailsDTO.getSize());
-                saleInventoryDetailsEntity.setSelling_price(saleInventoryDetailsDTO.getSelling_price());
-                saleInventoryDetailsEntity.setItem_qty(saleInventoryDetailsDTO.getItem_qty());
-                saleInventoryDetailsEntities.add(saleInventoryDetailsEntity);
+            saleInventoryDetailsEntity.setId(saleInventoryDetailsDTO.getId());
+            saleInventoryDetailsEntity.setSale(mapToSaleEntity(saleInventoryDetailsDTO.getSale()));
+            saleInventoryDetailsEntity.setInventory(mapToInventoryEntity(saleInventoryDetailsDTO.getInventory()));
+            saleInventoryDetailsEntity.setSize(saleInventoryDetailsDTO.getSize());
+            saleInventoryDetailsEntity.setSelling_price(saleInventoryDetailsDTO.getSelling_price());
+            saleInventoryDetailsEntity.setItem_qty(saleInventoryDetailsDTO.getItem_qty());
+            saleInventoryDetailsEntities.add(saleInventoryDetailsEntity);
         }
 
         return saleInventoryDetailsEntities;
 
 
-
     }
 
     public List<SizeInventoryDetailsEntity> mapToSizeInventoryDetailsEntity(List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTO) {
-List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>();
+        List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>();
         for (SizeInventoryDetailsDTO sizeInventoryDetailsDTO1 : sizeInventoryDetailsDTO) {
             SizeInventoryDetailsEntity sizeInventoryDetailsEntity = new SizeInventoryDetailsEntity();
             sizeInventoryDetailsEntity.setId(sizeInventoryDetailsDTO1.getId());
@@ -212,15 +210,15 @@ List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>(
 
     //branch mapping
 
-    public BranchDTO mapToBranchDTO(BranchEntity branchEntity){
+    public BranchDTO mapToBranchDTO(BranchEntity branchEntity) {
         return modelMapper.map(branchEntity, BranchDTO.class);
     }
 
-    public BranchEntity mapToBranchEntity(BranchDTO branchDTO){
+    public BranchEntity mapToBranchEntity(BranchDTO branchDTO) {
         return modelMapper.map(branchDTO, BranchEntity.class);
     }
 
-    public List<BranchDTO> mapToBranchDTOList(List<BranchEntity> branchEntities){
+    public List<BranchDTO> mapToBranchDTOList(List<BranchEntity> branchEntities) {
         return branchEntities.stream().map(hotel -> modelMapper.map(hotel, BranchDTO.class)).collect(Collectors.toList());
     }
 
@@ -234,5 +232,43 @@ List<SizeInventoryDetailsEntity> sizeInventoryDetailsEntities = new ArrayList<>(
 
     public void toUserDTO(UserEntity save) {
 
+    }
+
+
+    public SizeInventoryDetailsDTO mapToSizeInventoryDetailsDTO(SizeInventoryDetailsEntity sizeInventoryDetailsEntity) {
+        SizeInventoryDetailsDTO sizeDetailsDTO = new SizeInventoryDetailsDTO();
+
+        sizeDetailsDTO.setId(sizeInventoryDetailsEntity.getId());
+        sizeDetailsDTO.setSize(mapToSizeDTO(sizeInventoryDetailsEntity.getSize_code()));
+//        sizeDetailsDTO.setInventory(mapToInventoryDTO(sizeInventoryDetailsEntity.getItem_code()));
+        sizeDetailsDTO.setStatus(sizeInventoryDetailsEntity.getStatus());
+        sizeDetailsDTO.setQty(sizeInventoryDetailsEntity.getQty());
+        sizeDetailsDTO.setBuying_price(sizeInventoryDetailsEntity.getBuying_price());
+        sizeDetailsDTO.setSelling_price(sizeInventoryDetailsEntity.getSelling_price());
+        sizeDetailsDTO.setExpected_profit(sizeInventoryDetailsEntity.getExpected_profit());
+        sizeDetailsDTO.setProfit_margin(sizeInventoryDetailsEntity.getProfit_margin());
+
+        return sizeDetailsDTO;
+
+    }
+
+    public SizeInventoryDetailsEntity mapToSizeInventoryDetailEntity(SizeInventoryDetailsDTO sizeInventoryDetailsDTO) {
+        SizeInventoryDetailsEntity sizeInventoryDetailsEntity = new SizeInventoryDetailsEntity();
+
+        sizeInventoryDetailsEntity.setId(sizeInventoryDetailsDTO.getId());
+        sizeInventoryDetailsEntity.setSize_code(mapToSizeEntity(sizeInventoryDetailsDTO.getSize()));
+        sizeInventoryDetailsEntity.setItem_code(mapToInventoryEntity(sizeInventoryDetailsDTO.getInventory()));
+        sizeInventoryDetailsEntity.setStatus(sizeInventoryDetailsDTO.getStatus());
+        sizeInventoryDetailsEntity.setQty(sizeInventoryDetailsDTO.getQty());
+        sizeInventoryDetailsEntity.setBuying_price(sizeInventoryDetailsDTO.getBuying_price());
+        sizeInventoryDetailsEntity.setSelling_price(sizeInventoryDetailsDTO.getSelling_price());
+        sizeInventoryDetailsEntity.setExpected_profit(sizeInventoryDetailsDTO.getExpected_profit());
+        sizeInventoryDetailsEntity.setProfit_margin(sizeInventoryDetailsDTO.getProfit_margin());
+
+        return sizeInventoryDetailsEntity;
+    }
+
+    public List<ReturnEntity> mapToReturnEntityList(List<ReturnDTO> returnDTO) {
+        return returnDTO.stream().map(hotel -> modelMapper.map(hotel, ReturnEntity.class)).collect(Collectors.toList());
     }
 }

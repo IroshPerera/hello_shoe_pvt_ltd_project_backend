@@ -60,4 +60,9 @@ public class Branch implements BranchController<String, BranchDTO> {
     public String healthCheck() {
         return "Hello I'm Branch Controller. I'm OK! Have a nice day!";
     }
+
+    @GetMapping("/id")
+    public String getBranchId() {
+        return branchService.getBranchCode();
+    }
 }

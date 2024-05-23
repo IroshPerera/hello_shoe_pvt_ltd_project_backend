@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 
 
 @NoArgsConstructor
@@ -17,5 +18,8 @@ public class SaleInventoryDetailsDTO implements SuperDTO{
     private int size;
     private double selling_price;
     private int item_qty;
+    private String status;
+    private String branch_code;
+    private Date date;
 
 }

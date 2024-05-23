@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/return")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Return implements ReturnController<String, ReturnDTO> {
 
     private final ReturnService returnService;
@@ -18,7 +19,7 @@ public class Return implements ReturnController<String, ReturnDTO> {
 
     @Override
     @PostMapping
-    public boolean saveReturn(@RequestBody ReturnDTO returnDTO) {
+    public boolean saveReturn(@RequestBody List<ReturnDTO> returnDTO) {
         return returnService.add(returnDTO);
     }
 

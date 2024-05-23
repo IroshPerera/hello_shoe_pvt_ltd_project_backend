@@ -3,9 +3,11 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.BranchDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeCountDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeDesigCountsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.EmployeeRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.service.BranchService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.EmployeeService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.convert.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Designation;
@@ -26,12 +28,13 @@ public class EmployeeServiceIMPL implements EmployeeService {
     private final EmployeeRepo employeeRepo;
     private final Mapping mapping;
     private final Converter converter;
+    private final BranchService branchService;
 
     @Override
     public boolean add(EmployeeDTO employeeDTO) {
 
         EmployeeEntity employeeEntity = mapping.mapToEmployeeEntity(employeeDTO);
-        employeeDTO.setActive_state("ACTIVE");
+        employeeEntity.setActive_state("ACTIVE");
         employeeRepo.save(employeeEntity);
         return employeeRepo.existsById(employeeEntity.getEmployee_code());
     }
@@ -50,6 +53,13 @@ public class EmployeeServiceIMPL implements EmployeeService {
     public boolean update(EmployeeDTO employeeDTO) {
 
         employeeDTO.setActive_state("ACTIVE");
+
+        String profilePic = employeeDTO.getProfile_pic();
+        if (profilePic == null || profilePic.isEmpty()) {
+            EmployeeEntity employeeEntity = employeeRepo.getReferenceById(employeeDTO.getEmployee_code());
+            employeeDTO.setProfile_pic(employeeEntity.getProfile_pic());
+        }
+
         return add(employeeDTO);
 
 /*        Optional<EmployeeEntity> tmpEmployee = employeeRepo.findById(employeeDTO.getEmployee_code());
@@ -126,6 +136,73 @@ public class EmployeeServiceIMPL implements EmployeeService {
 
 
         return new EmployeeCountDTO(employeeEntities.size(), admin_employee_count, user_employee_count);
+
+    }
+
+    @Override
+    public EmployeeDesigCountsDTO getEmployeeCountByDesignation() {
+List<EmployeeEntity> employeeEntities = employeeRepo.findAll();
+
+        int manager = 0;
+        int stockKeeper = 0;
+        int delivery = 0;
+        int cashier = 0;
+        int cleaner = 0;
+        int securityGuard = 0;
+
+        for (EmployeeEntity employeeEntity : employeeEntities) {
+            switch (employeeEntity.getDesignation()) {
+                case MANAGER:
+                    manager++;
+                    break;
+                case STOCK_KEEPER:
+                    stockKeeper++;
+                    break;
+                case DELIVERY:
+                    delivery++;
+                    break;
+                case CASHIER:
+                    cashier++;
+                    break;
+                case CLEANER:
+                    cleaner++;
+                    break;
+                case SECURITY_GUARD:
+                    securityGuard++;
+                    break;
+            }
+        }
+
+        return new EmployeeDesigCountsDTO(manager, stockKeeper, delivery, cashier, cleaner, securityGuard);
+
+    }
+
+    @Override
+    public String getBranchCodeByEmployeeCode(String cashierName) {
+        return  employeeRepo.getBranchCodeByEmployeeCode(cashierName);
+
+    }
+
+    @Override
+    public List<String> getEmployeeCountByBranch() {
+        List<BranchDTO> branches = branchService.getAll();
+
+        List<EmployeeEntity> employeeEntities = employeeRepo.findAll();
+
+        List<String> empCountsBranch = new ArrayList<>();
+
+        for (BranchDTO branch : branches) {
+            int count = 0;
+            for (EmployeeEntity employeeEntity : employeeEntities) {
+                if (employeeEntity.getBranch().getBranch_code().equals(branch.getBranch_code())) {
+                    count++;
+                }
+            }
+            empCountsBranch.add(branch.getBranch_name() );
+            empCountsBranch.add(String.valueOf(count));
+        }
+        return empCountsBranch;
+
 
     }
 

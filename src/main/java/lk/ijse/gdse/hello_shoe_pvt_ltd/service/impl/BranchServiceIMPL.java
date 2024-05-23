@@ -64,4 +64,27 @@ public class BranchServiceIMPL implements BranchService {
         List<BranchEntity> branches = branchRepo.findAll();
         return mapping.mapToBranchDTOList(branches);
     }
+
+    @Override
+    public String getBranchCode() {
+        String branch_code =  branchRepo.getBranchCode();
+        if (branch_code == null) {
+            return "B001";
+        } else {
+            int num = Integer.parseInt(branch_code.substring(1));
+            num++;
+            if (num < 10) {
+                return "B00" + num;
+            } else if (num < 100) {
+                return "B0" + num;
+            } else {
+                return "B" + num;
+            }
+        }
+    }
+
+    @Override
+    public String getBranchName(String branchCode) {
+        return branchRepo.getBranchName(branchCode);
+    }
 }

@@ -1,6 +1,7 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SupplierCountDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.SupplierRepo;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SupplierEntity;
@@ -68,19 +69,48 @@ public class SupplierServiceIMPL implements SupplierService {
 
     @Override
     public String generateSupplierID() {
-       String supplierCode =  supplierRepo.generateSupplierID();
-         if (supplierCode == null){
-              return "S001";
-            }else{
-                int num = Integer.parseInt(supplierCode.replace("S", ""));
-                num++;
-                if (num < 10) {
-                    return "S00" + num;
-                } else if (num < 100) {
-                    return "S0" + num;
-                } else {
-                    return "S" + num;
-                }
-         }
+        String supplierCode = supplierRepo.generateSupplierID();
+        if (supplierCode == null) {
+            return "S001";
+        } else {
+            int num = Integer.parseInt(supplierCode.replace("S", ""));
+            num++;
+            if (num < 10) {
+                return "S00" + num;
+            } else if (num < 100) {
+                return "S0" + num;
+            } else {
+                return "S" + num;
+            }
+        }
+    }
+
+    @Override
+    public String getSupplierNameAndCode(String supplier_name) {
+        return supplierRepo.getSupplierNameAndCode(supplier_name);
+    }
+
+    @Override
+    public SupplierCountDTO getSupplierCount() {
+        int total_suppliers = 0;
+        int local_suppliers = 0;
+        int international_suppliers = 0;
+
+        List<SupplierEntity> allSuppliers = supplierRepo.getSupplier();
+
+        for (SupplierEntity supplierEntity : allSuppliers) {
+            total_suppliers++;
+            switch (supplierEntity.getCategory()) {
+                case LOCAL:
+                    local_suppliers++;
+                    break;
+                case INTERNATIONAL:
+                    international_suppliers++;
+                    break;
+            }
+        }
+
+        return new SupplierCountDTO(total_suppliers, local_suppliers, international_suppliers);
+
     }
 }

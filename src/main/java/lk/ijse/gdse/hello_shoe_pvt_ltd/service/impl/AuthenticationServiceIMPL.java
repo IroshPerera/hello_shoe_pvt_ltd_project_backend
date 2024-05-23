@@ -50,6 +50,7 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
                 .email(signIn.getEmail())
                 .password(passwordEncoder.encode(signIn.getPassword()))
                 .role(Role.valueOf(signIn.getRole()))
+                .employee_code(signIn.getEmployee_code())
                 .build();
         var savedUser = userRepo.save(mapping.toUserEntity(buildUser));
        var genToken =  jwtService.generateToken(savedUser);
@@ -64,4 +65,6 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
         jwtService.generateToken(user);
         return JwtAuthResponse.builder().token(jwtService.generateToken(user)).build().getToken();
     }
+
+
 }

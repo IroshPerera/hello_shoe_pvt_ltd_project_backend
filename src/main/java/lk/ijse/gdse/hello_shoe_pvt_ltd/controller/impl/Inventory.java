@@ -2,6 +2,8 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 
 import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.InventoryController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.GetSizeDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/inventory")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class Inventory implements InventoryController<String, InventoryDTO> {
 
     private final InventoryService inventoryService;
@@ -30,8 +33,8 @@ public class Inventory implements InventoryController<String, InventoryDTO> {
 
     @Override
     @PutMapping
-    public boolean updateInventory(@RequestBody InventoryDTO inventoryDTO) {
-        return inventoryService.update(inventoryDTO);
+    public boolean updateInventory(@RequestBody List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+        return inventoryService.update(sizeInventoryDetailsDTOS);
     }
 
     @Override
@@ -50,6 +53,16 @@ public class Inventory implements InventoryController<String, InventoryDTO> {
     @GetMapping("/all")
     public List<InventoryDTO> getAllInventories() {
         return inventoryService.getAll();
+    }
+
+@GetMapping("/count")
+    public String getInventoryCount() {
+        return inventoryService.getInventoryCount();
+    }
+
+    @GetMapping("/sizeDetails")
+    public List<SizeInventoryDetailsDTO> getSizeDetails(@RequestParam String item_code) {
+        return inventoryService.getSizeDetails(item_code);
     }
 
 

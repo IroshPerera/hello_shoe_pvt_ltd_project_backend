@@ -38,5 +38,6 @@ public class CustomerEntity {
     private String active_state;
     @OneToMany(mappedBy = "customer")
     private List<SaleEntity> sales = new ArrayList<>();
+    private String customer_name;
 
 }

@@ -20,4 +20,7 @@ public interface EmployeeRepo extends JpaRepository<EmployeeEntity, String> {
     @Override
     @Query(value = "SELECT * FROM employee WHERE active_state = 'ACTIVE'", nativeQuery = true)
     List<EmployeeEntity> findAll();
+
+    @Query(value = "SELECT branch_code FROM employee WHERE employee_code = ?1", nativeQuery = true)
+    String getBranchCodeByEmployeeCode(String cashierName);
 }

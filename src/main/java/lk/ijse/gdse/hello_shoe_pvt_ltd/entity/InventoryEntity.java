@@ -19,6 +19,8 @@ public class InventoryEntity{
     @Id
     private String item_code;
     private String item_desc;
+    @Lob
+    @Column(name = "item_pic", columnDefinition = "LONGTEXT")
     private String item_pic;
     private Occasion occasion;
     private Gender gender;

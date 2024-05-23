@@ -132,6 +132,5 @@ public class Converter {
         branchEntity.setContact(branchDTO.getContact());
         branchEntity.setNo_of_employee(branchDTO.getNo_of_employee());
         branchEntity.setBranch_manager(branchDTO.getBranch_manager());
-        branchEntity.setEmployees(mapping.mapToEmployeeEntities(branchDTO.getEmployees()));
     }
 }

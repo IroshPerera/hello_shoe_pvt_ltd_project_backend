@@ -3,6 +3,7 @@ package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.SuperController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.SupplierController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SupplierDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.SupplierCountDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.SupplierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,16 @@ public class Supplier implements SupplierController<String,SupplierDTO> {
     @GetMapping("/id")
     public String generateSupplierID() {
         return supplierService.generateSupplierID();
+    }
+
+    @GetMapping("/nameCode")
+    public String getSupplierNameAndCode(@RequestParam String supplier_name) {
+        return supplierService.getSupplierNameAndCode(supplier_name);
+    }
+
+    @GetMapping("/count")
+    public SupplierCountDTO getSupplierCount() {
+        return supplierService.getSupplierCount();
     }
 
 }

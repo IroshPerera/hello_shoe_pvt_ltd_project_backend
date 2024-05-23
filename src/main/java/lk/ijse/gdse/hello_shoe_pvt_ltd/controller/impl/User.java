@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class User {
 
     private final UserService userService;
@@ -29,6 +30,11 @@ public class User {
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignIn signIn) {
         return ResponseEntity.ok(authenticationService.signIn(signIn));
+    }
+
+    @GetMapping("/role")
+    public String getRole(@RequestParam String email) {
+      return userService.getRole(email);
     }
 
 }

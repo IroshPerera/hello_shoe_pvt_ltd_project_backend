@@ -43,8 +43,11 @@ public class SizeInventoryDetailsServiceIMPL implements SizeInventoryDetailsServ
     }
     @Transactional
     public void updateQty(String itemCode, String sizeCode, int qty) {
-        int currentQty = sizeInventoryDetailsRepo.findQtyByItemCodeAndSize(itemCode, sizeCode);
+
+        String sizeText = "SIZE"+sizeCode;
+
+        int currentQty = sizeInventoryDetailsRepo.findQtyByItemCodeAndSize(itemCode, sizeText);
         int newQty = currentQty + qty;
-        sizeInventoryDetailsRepo.updateQty(itemCode, sizeCode, newQty);
+        sizeInventoryDetailsRepo.updateQty(itemCode, sizeText, newQty);
     }
 }

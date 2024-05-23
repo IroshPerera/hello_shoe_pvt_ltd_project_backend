@@ -7,12 +7,20 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.CustomerEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.CustomerService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.convert.Converter;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.map.Mapping;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.util.smtp.Mail;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -86,4 +94,76 @@ public class CustomerServiceIMPL implements CustomerService {
             }
         }
     }
+
+    @Override
+    public CustomerDTO searchContact(String customerContact) {
+
+        CustomerEntity customerEntity = customerRepo.searchContact(customerContact);
+        if (customerEntity != null) {
+            return mapping.mapToCustomerDTO(customerEntity);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void updatePoints(String customerCode, double addedPoints) {
+        CustomerEntity customerEntity = customerRepo.getReferenceById(customerCode);
+        Integer currentPoints = customerEntity.getPoint();
+        if (currentPoints == 0 ) {
+            currentPoints = 0;
+        }
+        double newPoints = currentPoints + addedPoints;
+        customerRepo.updatePoints(customerCode, newPoints);
+        customerRepo.updateLastPurchaseDate(customerCode,   new Timestamp(new Date().getTime()));
+
+    }
+
+    @Scheduled(cron = "0 0 8 * * ?")
+    @Override
+    public String getCustomerCount() {
+        return customerRepo.getCustomerCount();
+    }
+
+    public void sendMail() {
+
+        /*Get customer birthday*/
+
+       int count = customerRepo.findTodayBirthDayCustomerCount();
+
+       if (count == 0) {
+           return;
+         }else {
+           List<CustomerEntity> customerEntityList = customerRepo.findTodayBirthDayCustomer();
+           for (CustomerEntity customerEntity : customerEntityList) {
+               sendBirthdayWish(customerEntity);
+           }
+       }
+
+
+    }
+
+       public void sendBirthdayWish(CustomerEntity customerEntity) {
+           Date date = new Date();
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd");
+
+           /*Send customer birthday wish*/
+           // Construct the email message
+
+           String email = "irosh@gmail.com";
+           String message = "Dear " + "Irosh" + ",\n\n" +
+                   "We wish you a very Happy Birthday on " + date + "!\n" +
+                   "May your day be filled with joy, happiness, and lots of memorable moments.\n\n" +
+                   "Best regards,\n" +
+                   "Hello Shoe (PVT) LTD\n";
+
+
+           Mail mail = new Mail();
+           mail.setMsg(message);//email message
+           mail.setTo(email); //receiver's mail
+           mail.setSubject("Happy Birthday!"); //email subject
+
+           Thread thread = new Thread(mail);
+           thread.start();
+       }
 }

@@ -4,6 +4,7 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.controller.EmployeeController;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.BranchDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.EmployeeDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeCountDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.EmployeeDesigCountsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.EmployeeService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.util.enums.Designation;
 import lombok.RequiredArgsConstructor;
@@ -68,5 +69,13 @@ public class Employee implements EmployeeController<String, EmployeeDTO>{
     @GetMapping("/count")
     public EmployeeCountDTO getEmployeeCount() {
         return employeeService.getEmployeeCount();
+    }
+
+    @GetMapping("/countDesignation")
+    public EmployeeDesigCountsDTO getEmployeeCountByDesignation() {
+        return employeeService.getEmployeeCountByDesignation();
+    } @GetMapping("/totalBranch")
+    public List<String> getEmployeeCountByBranch() {
+        return employeeService.getEmployeeCountByBranch();
     }
 }
