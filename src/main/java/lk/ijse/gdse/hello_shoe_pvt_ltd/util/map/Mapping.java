@@ -271,4 +271,8 @@ public class Mapping {
     public List<ReturnEntity> mapToReturnEntityList(List<ReturnDTO> returnDTO) {
         return returnDTO.stream().map(hotel -> modelMapper.map(hotel, ReturnEntity.class)).collect(Collectors.toList());
     }
+
+    public List<UserDTO> toUserDTOs(List<UserEntity> all) {
+        return all.stream().map(hotel -> modelMapper.map(hotel, UserDTO.class)).collect(Collectors.toList());
+    }
 }

@@ -1,5 +1,6 @@
 package lk.ijse.gdse.hello_shoe_pvt_ltd.controller.impl;
 
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.UserDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.reqAndresp.authObj.AuthenticationService;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.reqAndresp.response.JwtAuthResponse;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.reqAndresp.secure.SignIn;
@@ -8,6 +9,8 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -35,6 +38,17 @@ public class User {
     @GetMapping("/role")
     public String getRole(@RequestParam String email) {
       return userService.getRole(email);
+    }
+
+
+    @GetMapping("/all")
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @DeleteMapping
+    public boolean deleteUser(@RequestParam String email) {
+        return userService.deleteUser(email);
     }
 
 }

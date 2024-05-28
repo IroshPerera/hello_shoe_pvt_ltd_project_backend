@@ -22,7 +22,7 @@ public class SaleInventoryDetailsEntity {
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     private SaleEntity sale;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "item_code", referencedColumnName = "item_code")
     private InventoryEntity inventory;
     private int size;

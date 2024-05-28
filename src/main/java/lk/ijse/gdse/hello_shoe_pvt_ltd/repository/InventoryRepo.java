@@ -29,4 +29,8 @@ public interface InventoryRepo extends JpaRepository<InventoryEntity,String> {
 
     @Query(value = "SELECT COUNT(item_code) FROM inventory", nativeQuery = true)
     String getInventoryCount();
+
+    @Modifying
+    @Query(value = "UPDATE inventory SET item_desc = :itemDesc, item_pic = :itemPic WHERE item_code = :itemCode", nativeQuery = true)
+    void updateDetails(String itemCode, String itemDesc, String itemPic);
 }

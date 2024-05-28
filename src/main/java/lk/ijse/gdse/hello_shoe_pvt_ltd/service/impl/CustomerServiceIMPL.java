@@ -109,10 +109,18 @@ public class CustomerServiceIMPL implements CustomerService {
     @Override
     public void updatePoints(String customerCode, double addedPoints) {
         CustomerEntity customerEntity = customerRepo.getReferenceById(customerCode);
-        Integer currentPoints = customerEntity.getPoint();
-        if (currentPoints == 0 ) {
+        Integer currentPoints = 0;
+        try {
+          currentPoints = customerEntity.getPoint();
+
+           if (currentPoints == 0 || currentPoints == null) {
+               currentPoints = 0;
+           }
+       }catch (NullPointerException e){
             currentPoints = 0;
-        }
+         }
+
+
         double newPoints = currentPoints + addedPoints;
         customerRepo.updatePoints(customerCode, newPoints);
         customerRepo.updateLastPurchaseDate(customerCode,   new Timestamp(new Date().getTime()));

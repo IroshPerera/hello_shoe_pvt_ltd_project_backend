@@ -5,8 +5,10 @@ import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.GetSizeDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.ItemUpdateDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.service.InventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +34,14 @@ public class Inventory implements InventoryController<String, InventoryDTO> {
     }
 
     @Override
-    @PutMapping
-    public boolean updateInventory(@RequestBody List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+    public boolean updateInventory(List<SizeInventoryDetailsDTO> inventoryDTO) {
+        return false;
+    }
+
+
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public boolean updateInventory(@RequestPart("itemDTO")ItemUpdateDetailsDTO itemUpdateDetailsDTO, @RequestPart("sizeInventoryDetailsDTO") List<SizeInventoryDetailsDTO> sizeInventoryDetailsDTOS) {
+        inventoryService.updateDetails(itemUpdateDetailsDTO);
         return inventoryService.update(sizeInventoryDetailsDTOS);
     }
 

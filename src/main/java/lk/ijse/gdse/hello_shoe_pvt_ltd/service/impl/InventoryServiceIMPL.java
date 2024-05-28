@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.InventoryDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.SizeInventoryDetailsDTO;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.InventoryDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.dto.extra.ItemUpdateDetailsDTO;
+import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.EmployeeEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.InventoryEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.entity.SizeInventoryDetailsEntity;
 import lk.ijse.gdse.hello_shoe_pvt_ltd.repository.InventoryRepo;
@@ -128,6 +130,21 @@ public class InventoryServiceIMPL implements InventoryService {
     @Override
     public String getInventoryCount() {
         return inventoryRepo.getInventoryCount();
+    }
+
+    @Override
+    public void updateDetails(ItemUpdateDetailsDTO itemUpdateDetailsDTO) {
+        String itemCode = itemUpdateDetailsDTO.getItem_code();
+        String itemDesc = itemUpdateDetailsDTO.getItem_desc();
+        String itemPic = itemUpdateDetailsDTO.getItem_pic();
+        if (itemPic == null || itemPic.isEmpty()) {
+            InventoryEntity inventoryEntity = inventoryRepo.getReferenceById(itemCode);
+            itemPic = inventoryEntity.getItem_pic();
+        }
+
+        inventoryRepo.updateDetails(itemCode, itemDesc, itemPic);
+
+
     }
 
     private String generateItemCode(InventoryEntity inventoryEntity) {

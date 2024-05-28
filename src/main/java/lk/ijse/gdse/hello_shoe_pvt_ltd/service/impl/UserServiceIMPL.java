@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +49,23 @@ public class UserServiceIMPL implements UserService {
         Optional<UserEntity> user = userRepo.findByEmail(cashierName);
         return user.map(UserEntity::getEmployee_code).orElse(null);
 
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<UserDTO> userDTOs = mapping.toUserDTOs(userRepo.findAll());
+
+        for (UserDTO userDTO : userDTOs) {
+            userDTO.setPassword(null);
+
+        }
+        return userDTOs;
+    }
+
+    @Override
+    public boolean deleteUser(String email) {
+        userRepo.deleteByEmail(email);
+        return true;
     }
 }
 
